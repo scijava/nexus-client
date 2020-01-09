@@ -1,0 +1,7 @@
+.classpath
+.project
+.DS_Store
+/target/
+/test-results/
+*.class
+*.prefs
