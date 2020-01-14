@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -10,7 +8,7 @@
 	</parent>
 
 	<artifactId>nexus-client</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 
 	<name>Nexus Client</name>
 	<description>A client for the Nexus Sonatype ReST API V.3</description>
@@ -64,7 +62,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/scijava/nexus-client</connection>
 		<developerConnection>scm:git:git@github.com:scijava/nexus-client</developerConnection>
-		<tag>HEAD</tag>
+		<tag>nexus-client-0.1.0</tag>
 		<url>https://github.com/scijava/nexus-client</url>
 	</scm>
 	<issueManagement>
