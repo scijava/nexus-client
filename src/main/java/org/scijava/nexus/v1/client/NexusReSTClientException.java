@@ -1,4 +1,4 @@
-package org.scijava.nexus.v3.client;
+package org.scijava.nexus.v1.client;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ForbiddenException;
@@ -29,9 +29,9 @@ public class NexusReSTClientException extends Exception {
 
 	/**
 	 * Convenience method to facilitate feedback to user
+	 * See org.jboss.resteasy.util.HttpResponseCodes
 	 * 
 	 * @return an HTTP Error Code if exception was caused by a server error, else returns 0
-	 * @see org.jboss.resteasy.util.HttpResponseCodes
 	 */
 	public int getHttpErrorCode() {
 		if ( getCause() instanceof NotFoundException)

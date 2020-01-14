@@ -1,4 +1,4 @@
-package org.scijava.nexus.v3.client;
+package org.scijava.nexus.v1.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,15 +16,15 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.scijava.nexus.v3.client.NexusReSTClient;
-import org.scijava.nexus.v3.client.NexusReSTClientException;
-import org.scijava.nexus.v3.client.domain.Asset;
-import org.scijava.nexus.v3.client.domain.Component;
-import org.scijava.nexus.v3.client.domain.ComponentUploadForm;
-import org.scijava.nexus.v3.client.domain.Query;
-import org.scijava.nexus.v3.client.domain.Repository;
-import org.scijava.nexus.v3.client.domain.Query.Format;
-import org.scijava.nexus.v3.client.domain.Query.Sort;
+import org.scijava.nexus.v1.client.NexusReSTClient;
+import org.scijava.nexus.v1.client.NexusReSTClientException;
+import org.scijava.nexus.v1.client.domain.Asset;
+import org.scijava.nexus.v1.client.domain.Component;
+import org.scijava.nexus.v1.client.domain.ComponentUploadForm;
+import org.scijava.nexus.v1.client.domain.Query;
+import org.scijava.nexus.v1.client.domain.Repository;
+import org.scijava.nexus.v1.client.domain.Query.Format;
+import org.scijava.nexus.v1.client.domain.Query.Sort;
 
 /**
  * @author turekg

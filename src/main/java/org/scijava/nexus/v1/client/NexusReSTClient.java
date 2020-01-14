@@ -1,4 +1,4 @@
-package org.scijava.nexus.v3.client;
+package org.scijava.nexus.v1.client;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,11 +21,11 @@ import javax.ws.rs.client.ClientBuilder;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
-import org.scijava.nexus.v3.client.domain.Asset;
-import org.scijava.nexus.v3.client.domain.Component;
-import org.scijava.nexus.v3.client.domain.ComponentUploadForm;
-import org.scijava.nexus.v3.client.domain.Query;
-import org.scijava.nexus.v3.client.domain.Repository;
+import org.scijava.nexus.v1.client.domain.Asset;
+import org.scijava.nexus.v1.client.domain.Component;
+import org.scijava.nexus.v1.client.domain.ComponentUploadForm;
+import org.scijava.nexus.v1.client.domain.Query;
+import org.scijava.nexus.v1.client.domain.Repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -45,14 +45,15 @@ public class NexusReSTClient {
 	/**
 	 * List all the repositories (local and mirrored) hosted on server
 	 * 
-	 * Note: the Repository object the service response is mapped to only contains attributes deemed useful at this stage, 
-	 * hence the setting of DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES to 'false'.
+	 * Note: the Repository object the service response is mapped to only
+	 * contains attributes deemed useful at this stage,
+	 * hence the setting of DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES to
+	 * 'false'.
 	 * 
 	 * @param baseURL
 	 *            - the base URL of the Nexus server
-	 * @returns list of {@link Repository} managed by the server
-	 * 
-	 * @throws NexusReSTClientException
+	 * @return list of {@link Repository} managed by the server
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a Runtime or IOException is encountered.
 	 */
 	public static List< Repository > listRepositories( String baseURL ) throws NexusReSTClientException {
 		Client client = null;
@@ -63,7 +64,7 @@ public class NexusReSTClient {
 			String response = restClient.listRepositories();
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure( DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true );
-			mapper.configure( DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			mapper.configure( DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false );
 			return Arrays.asList( mapper.readValue( response, Repository[].class ) );
 		} catch ( RuntimeException | IOException e ) {
 			throw new NexusReSTClientException( e );
@@ -81,9 +82,9 @@ public class NexusReSTClient {
 	 * @param q
 	 *            - {@link Query} object in which a number of supported search
 	 *            parameters can be set
-	 * @returns a list of {@link Asset} or an empty list if none were found.
+	 * @return a list of {@link Asset} or an empty list if none were found.
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException or IOException is encountered.
 	 * 
-	 * @throws NexusReSTClientException
 	 */
 	@SuppressWarnings( "unchecked" )
 	public static List< Asset > searchAssets( String baseURL, Query q ) throws NexusReSTClientException {
@@ -97,7 +98,7 @@ public class NexusReSTClient {
 			boolean begin = true;
 			String continuationToken = "";
 			String response;
-			
+
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure( DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true );
 			while ( continuationToken != null ) {
@@ -168,8 +169,9 @@ public class NexusReSTClient {
 	 * @param downloadDir
 	 *            - where to download the asset to
 	 * @return File handle to down loaded asset
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException or IOException is encountered.
 	 * 
-	 * @throws NexusReSTClientException
+	 * 
 	 */
 	public static File searchAssetsAndDownload( String baseURL, Query q, String fileName, String downloadDir ) throws NexusReSTClientException {
 		Client client = null;
@@ -189,7 +191,7 @@ public class NexusReSTClient {
 					q.getMavenGroupId(),
 					q.getMavenArtifactId(),
 					q.getMavenBaseVersion(),
-					q.getMavenExtension());
+					q.getMavenExtension() );
 
 		} catch ( RedirectionException e ) {
 			URL url;
@@ -220,8 +222,8 @@ public class NexusReSTClient {
 	 *            - the repository of interest
 	 * 
 	 * @return list of assets stored in the given repository
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException is encountered.
 	 * 
-	 * @throws NexusReSTClientException
 	 */
 	public static List< Asset > listAssets( String baseURL, String repository ) throws NexusReSTClientException {
 		Client client = null;
@@ -244,12 +246,12 @@ public class NexusReSTClient {
 	 * @param baseURL
 	 *            - the base URL of the Nexus server
 	 * @param assetId
+	 *            - the asset's ID
 	 * @param downloadDir
 	 *            - target download directory
 	 * 
 	 * @return a handle to the down loaded asset
-	 * 
-	 * @throws NexusReSTClientException
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException or IOException is encountered.
 	 */
 	public static File getAsset(
 			String baseURL,
@@ -280,10 +282,13 @@ public class NexusReSTClient {
 	 * @param baseURL
 	 *            - the base URL of the Nexus server
 	 * @param username
+	 *            - login of user with delete privileges
 	 * @param password
+	 *            - password of user with delete privileges
 	 * @param assetId
+	 *            - ID of asset to be deleted
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException is encountered.
 	 * 
-	 * @throws NexusReSTClientException
 	 */
 	public static void deleteAsset( String baseURL, String username, String password, String assetId ) throws NexusReSTClientException {
 		Client client = null;
@@ -310,9 +315,8 @@ public class NexusReSTClient {
 	 *            - {@link Query} object in which a number of supported search
 	 *            parameters can be set
 	 * 
-	 * @returns a list of {@link Component} or an empty list if none were found.
-	 * 
-	 * @throws NexusReSTClientException
+	 * @return a list of {@link Component} or an empty list if none were found.
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException or IOException is encountered.
 	 */
 	@SuppressWarnings( "unchecked" )
 	public static List< Component > searchComponents( String baseURL, Query q ) throws NexusReSTClientException {
@@ -383,8 +387,7 @@ public class NexusReSTClient {
 	 *            - the repository of interest
 	 * 
 	 * @return list of components stored in the given repository
-	 * 
-	 * @throws NexusReSTClientException
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException is encountered.
 	 */
 	public static List< Component >
 			listComponents( String baseURL, String repository ) throws NexusReSTClientException {
@@ -401,7 +404,7 @@ public class NexusReSTClient {
 			if ( client != null ) client.close();
 		}
 	}
-	
+
 	/**
 	 * Delete the given component. Only users with delete privilege can use this
 	 * command.
@@ -409,11 +412,15 @@ public class NexusReSTClient {
 	 * 
 	 * @param baseURL
 	 *            - the base URL of the Nexus server
+	 * @param baseURL
+	 *            - the base URL of the Nexus server
 	 * @param username
+	 *            - login of user with delete privileges
 	 * @param password
+	 *            - password of user with delete privileges
 	 * @param componentId
-	 * 
-	 * @throws NexusReSTClientException
+	 *            - ID of component to be deleted
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException is encountered.
 	 */
 	public static void deleteComponent( String baseURL, String username, String password, String componentId ) throws NexusReSTClientException {
 		Client client = null;
@@ -431,7 +438,6 @@ public class NexusReSTClient {
 		}
 	}
 
-
 	/**
 	 * Download the component with the given ID. This will download all the
 	 * assets
@@ -439,21 +445,20 @@ public class NexusReSTClient {
 	 * 
 	 * @param baseURL
 	 *            - the base URL of the Nexus server
-	 * @param assetId
+	 * @param componentId - ID of component to be downloaded
 	 * @param downloadDir
 	 *            - target download directory
 	 * 
 	 * @return a list of handles to all the component's down loaded assets
-	 * 
-	 * @throws NexusReSTClientException
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException or IOException is encountered.
 	 */
-	public static List< File > getComponent( String baseURL, String id, String downloadDir ) throws NexusReSTClientException {
+	public static List< File > getComponent( String baseURL, String componentId, String downloadDir ) throws NexusReSTClientException {
 		Client client = null;
 		try {
 			client = ClientBuilder.newClient();
 			ResteasyWebTarget webTarget = ( ResteasyWebTarget ) client.target( baseURL );
 			NexusReSTClientProxy restClient = webTarget.proxy( NexusReSTClientProxy.class );
-			String response = restClient.getComponent( id );
+			String response = restClient.getComponent( componentId );
 			ObjectMapper mapper = new ObjectMapper();
 			Component component = mapper.readValue( response, Component.class );
 			return saveComponent( component, downloadDir );
@@ -465,15 +470,19 @@ public class NexusReSTClient {
 			if ( client != null ) client.close();
 		}
 	}
-	
+
 	/**
-	 * Upload a component: up to 3 files that belong to the same name space. For more, repeat the call.
-	 * @param baseURL - the base URL of the Nexus server
-	 * @param username - 
-	 * @param password
-	 * @param repository 
-	 * @param uploadForm {@link ComponentUploadForm}
-	 * @throws NexusReSTClientException
+	 * Upload a component: up to 3 files that belong to the same name space. For
+	 * more, repeat the call.
+	 * 
+	 * @param baseURL
+	 *            - the base URL of the Nexus server
+	 * @param username - name of user with upload permission to given repository
+	 * @param password - password of user with upload permission to given repository
+	 * @param repository - name of repository to which component is to be uploaded
+	 * @param uploadForm - 
+	 *            {@link ComponentUploadForm}
+	 * @throws org.scijava.nexus.v1.client.NexusReSTClientException if a RuntimeException is encountered.
 	 */
 	public static void uploadComponent(
 			String baseURL,
