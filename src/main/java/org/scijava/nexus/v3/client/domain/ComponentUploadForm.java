@@ -1,4 +1,4 @@
-package org.scijava.nexus.client.domain;
+package org.scijava.nexus.v3.client.domain;
 
 import java.io.InputStream;
 

@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>nexus-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>Nexus Client</name>
 	<description>A client for the Nexus Sonatype ReST API V.3</description>
@@ -73,7 +73,7 @@
 	</issueManagement>
 	<ciManagement>
 		<system>Travis CI</system>
-		<url>https://travis-ci.org/scijava/nexus-client</url>
+		<url>https://travis-ci.com/scijava/nexus-client</url>
 	</ciManagement>
 
 	<properties>
@@ -106,12 +106,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.9.1</version>
+			<version>2.9.10.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.9</version>
+			<version>2.9.10</version>
 		</dependency>
 
 		<!-- Test dependencies -->

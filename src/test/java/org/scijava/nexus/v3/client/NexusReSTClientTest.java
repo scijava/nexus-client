@@ -1,4 +1,4 @@
-package org.scijava.nexus.client;
+package org.scijava.nexus.v3.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,15 +16,15 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.scijava.nexus.client.NexusReSTClient;
-import org.scijava.nexus.client.NexusReSTClientException;
-import org.scijava.nexus.client.domain.Asset;
-import org.scijava.nexus.client.domain.Component;
-import org.scijava.nexus.client.domain.ComponentUploadForm;
-import org.scijava.nexus.client.domain.Query;
-import org.scijava.nexus.client.domain.Repository;
-import org.scijava.nexus.client.domain.Query.Format;
-import org.scijava.nexus.client.domain.Query.Sort;
+import org.scijava.nexus.v3.client.NexusReSTClient;
+import org.scijava.nexus.v3.client.NexusReSTClientException;
+import org.scijava.nexus.v3.client.domain.Asset;
+import org.scijava.nexus.v3.client.domain.Component;
+import org.scijava.nexus.v3.client.domain.ComponentUploadForm;
+import org.scijava.nexus.v3.client.domain.Query;
+import org.scijava.nexus.v3.client.domain.Repository;
+import org.scijava.nexus.v3.client.domain.Query.Format;
+import org.scijava.nexus.v3.client.domain.Query.Sort;
 
 /**
  * @author turekg
@@ -32,10 +32,10 @@ import org.scijava.nexus.client.domain.Query.Sort;
 @TestMethodOrder( MethodOrderer.OrderAnnotation.class )
 public class NexusReSTClientTest {
 
-	private final static String TEST_DIR = System.getProperty( "user.dir" ) + File.separator + "test-results";
-	private final static String BASE_URL = System.getenv( "nexus.url" );
-	private final static String USERNAME = System.getenv( "nexus.usr" );
-	private final static String PASSWORD = System.getenv( "nexus.pwd" );
+	private final static String TEST_DIR = System.getProperty( "java.io.tmpdir" ) + File.separator + "test-results";
+	private final static String BASE_URL = System.getenv( "NEXUS_URL" );
+	private final static String USERNAME = System.getenv( "NEXUS_USR" );
+	private final static String PASSWORD = System.getenv( "NEXUS_PWD" );
 
 	private final static String REPO_TEST_RAW = "autotest-raw";
 	private final static String ASSET1 = "jars/bridj-0.7.0.jar";

@@ -1,4 +1,4 @@
-package org.scijava.nexus.client;
+package org.scijava.nexus.v3.client;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,11 +21,11 @@ import javax.ws.rs.client.ClientBuilder;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
-import org.scijava.nexus.client.domain.Asset;
-import org.scijava.nexus.client.domain.Component;
-import org.scijava.nexus.client.domain.ComponentUploadForm;
-import org.scijava.nexus.client.domain.Query;
-import org.scijava.nexus.client.domain.Repository;
+import org.scijava.nexus.v3.client.domain.Asset;
+import org.scijava.nexus.v3.client.domain.Component;
+import org.scijava.nexus.v3.client.domain.ComponentUploadForm;
+import org.scijava.nexus.v3.client.domain.Query;
+import org.scijava.nexus.v3.client.domain.Repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -539,9 +539,9 @@ public class NexusReSTClient {
 		for ( Asset asset : assets ) {
 			String url = asset.getDownloadUrl();
 			String fileName = url.substring( url.lastIndexOf( '/' ) + 1 );
-			String tmpPath = TMPDIR + File.pathSeparator + fileName;
+			String tmpPath = TMPDIR + File.separator + fileName;
 			String finalPath =
-					downloadDir + File.pathSeparator + fileName;
+					downloadDir + File.separator + fileName;
 			files.add( saveToFile( new URL( url ), tmpPath, finalPath ) );
 		}
 		return files;

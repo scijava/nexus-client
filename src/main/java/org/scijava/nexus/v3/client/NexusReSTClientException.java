@@ -1,4 +1,4 @@
-package org.scijava.nexus.client;
+package org.scijava.nexus.v3.client;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ForbiddenException;

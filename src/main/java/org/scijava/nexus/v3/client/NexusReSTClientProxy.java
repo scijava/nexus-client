@@ -1,4 +1,4 @@
-package org.scijava.nexus.client;
+package org.scijava.nexus.v3.client;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-import org.scijava.nexus.client.domain.ComponentUploadForm;
+import org.scijava.nexus.v3.client.domain.ComponentUploadForm;
 
 /**
  * <p>
