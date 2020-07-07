@@ -208,9 +208,11 @@ public class NexusReSTClientTest {
 			q.setFormat( Format.RAW);
 			q.setComponentGroup( "/clij/jars" );
 			List< Asset > tbdeleted = NexusReSTClient.searchAssets( BASE_URL, q );
-			assertEquals( 1, tbdeleted.size() );
-			NexusReSTClient.deleteAsset( BASE_URL, USERNAME, PASSWORD, tbdeleted.get( 0 ).getId() );
-			NexusReSTClient.searchAssets( BASE_URL, q );
+			// If these tests run by JUNIT4, ie not in order, this test will fail if we assume
+			// the that the asset to be deleted is there. Hence check to see if it's worth the attempt.
+			if (tbdeleted.size() == 1)
+				NexusReSTClient.deleteAsset( BASE_URL, USERNAME, PASSWORD, tbdeleted.get( 0 ).getId() );
+				NexusReSTClient.searchAssets( BASE_URL, q );
 
 		} catch ( NexusReSTClientException e ) {
 
