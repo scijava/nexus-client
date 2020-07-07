@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>nexus-client</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<name>Nexus Client</name>
 	<description>A client for the Nexus Sonatype ReST API V.3</description>
